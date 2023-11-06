@@ -1,3 +1,9 @@
+// src/main.rs
+
+use parchis_game::{Board, Player, Pawn, Color};
+
 fn main() {
-    println!("Hello, world!");
+
+    println!("Welcome to Parchis!");
+
 }
