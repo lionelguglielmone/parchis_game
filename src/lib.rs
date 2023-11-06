@@ -1,6 +1,8 @@
-// src/lib.rs
+pub mod game; 
+pub mod input_helpers; 
 
-// Colors available for pawns
+
+#[derive(Copy, Clone, Eq, PartialEq, Hash)] 
 pub enum Color {
     Red,
     Green,
@@ -8,18 +10,12 @@ pub enum Color {
     Yellow,
 }
 
-// Representation of a pawn in the game
 pub struct Pawn {
     pub color: Color,
-    pub position: u8, // Position on the board
+    pub position: u8, 
 }
 
-// A player in the game, with four pawns
 pub struct Player {
     pub pawns: [Pawn; 4],
-}
-
-// The game board
-pub struct Board {
-
+    pub name: String,
 }
