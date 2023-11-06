@@ -17,7 +17,7 @@ pub fn get_unique_player_name(existing_names: &HashSet<String>) -> String {
 }
 
 pub fn get_unique_color(existing_colors: &HashSet<Color>) -> Color {
-    let mut color_choices = vec![
+    let color_choices = vec![
         ("Red", Color::Red), 
         ("Green", Color::Green), 
         ("Blue", Color::Blue), 

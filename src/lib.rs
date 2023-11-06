@@ -11,9 +11,11 @@ pub enum Color {
 }
 
 pub struct Pawn {
+    pub id: u8,
     pub color: Color,
-    pub position: u8, 
+    pub position: u8,
 }
+
 
 pub struct Player {
     pub pawns: [Pawn; 4],
