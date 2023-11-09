@@ -1,0 +1,26 @@
+# Rust Parchis Game
+
+This project is a simple implementation of the classic board game Parchis, written in Rust. It demonstrates basic usage of Rust features such as enums, structs, modules, and vector management, as well as user input handling and random number generation.
+
+## Requirements
+
+To build and run this project, you will need:
+
+- Rust programming language [installation](https://www.rust-lang.org/tools/install).
+- Cargo, Rust's package manager and build tool, which is included with Rust.
+
+## Building the Project
+
+To build the project, follow these steps:
+
+1. Clone the repository to your local machine using `git clone` followed by the repository URL.
+2. Navigate to the project directory where you cloned the repository.
+3. Run `cargo build` to compile the project. This command will create an executable in the `target/debug` directory.
+
+## Running the Game
+
+Once the project is built, you can run the game using the following command:
+
+```sh
+cargo run
+```
