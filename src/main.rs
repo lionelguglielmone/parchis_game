@@ -3,11 +3,13 @@ mod input_helpers;
 
 use parchis_game::game::Game;
 use parchis_game::{Player, Pawn, Color};
-use input_helpers::{get_unique_player_name, get_unique_color};
+use input_helpers::{clear_screen, get_unique_player_name, get_unique_color, print_available_colors, print_header};
 use std::collections::HashSet;
 use std::io::{self, Write};
 
 fn main() {
+    clear_screen();
+    print_header();
     let mut player_names = HashSet::new();
     let mut player_colors = HashSet::new();
     let mut players = Vec::new();
@@ -17,18 +19,23 @@ fn main() {
         io::stdout().flush().expect("Failed to flush stdout");
 
         let mut input = String::new();
-        io::stdin().read_line(&mut input).expect("Failed to read line");
-
-        match input.trim().parse::<usize>() {
-            Ok(num) if num >= 2 && num <= 4 => break num,
-            _ => println!("Invalid input. Please enter a number between 2 and 4."),
+        if io::stdin().read_line(&mut input).is_ok() {
+            match input.trim().parse::<usize>() {
+                Ok(num) if (2..=4).contains(&num) => break num,
+                _ => println!("Invalid input. Please enter a number between 2 and 4."),
+            }
+        } else {
+            println!("Error reading input. Please try again.");
         }
     };
 
-    for _ in 0..number_of_players {
+    for player_number in 1..=number_of_players {
+        clear_screen();
+        println!("Player {} setup:", player_number);
         let name = get_unique_player_name(&player_names);
         player_names.insert(name.clone());
 
+        print_available_colors(&player_colors);
         let color = get_unique_color(&player_colors);
         player_colors.insert(color);
 
@@ -40,15 +47,18 @@ fn main() {
         ];
 
         players.push(Player {
-            name: name.to_string(),
+            name: name,
             pawns,
         });
     }
 
     let mut game = Game::new(players);
 
-    println!("Game started with {} players", game.players.len());
-    loop {
+    while !game.game_has_winner() {
+        clear_screen();
+        game.print_turn_banner();
+        game.show_pawn_positions();
+
         game.play_turn();
 
         if game.game_has_winner() {
@@ -56,9 +66,9 @@ fn main() {
             break;
         }
 
-        println!("Press Enter to continue to the next turn.");
+        println!("\nPress Enter to continue to the next turn.");
         io::stdin().read_line(&mut String::new()).expect("Failed to read line");
-
-        println!("It's now player {}'s turn", game.players[game.current_turn].name);
     }
+
+    println!("Congratulations, {} has won the game!", game.players[game.current_turn].name);
 }

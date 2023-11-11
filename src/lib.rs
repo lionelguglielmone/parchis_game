@@ -2,7 +2,7 @@ pub mod game;
 pub mod input_helpers; 
 
 
-#[derive(Copy, Clone, Eq, PartialEq, Hash)] 
+#[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)] 
 pub enum Color {
     Red,
     Green,
